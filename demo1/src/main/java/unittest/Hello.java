@@ -13,9 +13,6 @@ public class Hello {
     }
 }
 
-class UserDB { // Connect to DB
-    public String getNameById(int id) {
-        //Unstable with dependency
-        throw new RuntimeException("Id=2 not found");
-    }
+interface UserDB { // Connect to DB
+    public String getNameById(int id)  throws UserNotFoundException;
 }

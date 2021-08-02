@@ -31,23 +31,24 @@ class HelloTest {
     @DisplayName("ทำการทดสอบกับ database fail(I = Isolate/Independent)")
     public void case03() {
         Hello hello = new Hello();
-        hello.userDB = new UserDBFail();
+        hello.userDB = new UserDB() {
+            @Override
+            public String getNameById(int id) {
+                throw new UserNotFoundException("Id=" + id + " not found");
+            }
+        };
+//        hello.userDB = id -> {
+//            throw new UserNotFoundException("Id=" + id + " not found");
+//        };
         Exception exception = assertThrows(UserNotFoundException.class, () ->
                 hello.workWithDB(2));
         assertEquals("Id=2 not found", exception.getMessage());
     }
 }
 
-class UserDBSuccess extends UserDB {
+class UserDBSuccess implements UserDB {
     @Override
     public String getNameById(int id) {
         return "kanyarat";
-    }
-}
-
-class UserDBFail extends UserDB {
-    @Override
-    public String getNameById(int id) {
-        throw new UserNotFoundException("Id=" + id + " not found");
     }
 }
