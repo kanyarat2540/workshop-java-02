@@ -10,16 +10,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GenerateIdServiceTest {
     @Test
-    @DisplayName("ID= XYZ7")
+    @DisplayName("Demo Stub Random :: ID= XYZ7")
     public void case01() {
         GenerateIdService generateIdService = new GenerateIdService();
-        generateIdService.random = new Random() {
-            @Override
-            public int nextInt() {
-               return 7;
-            }
-        };
-        String id = generateIdService.get();
+        generateIdService.setRandom(new StubRandom(7));
+        String id = generateIdService.get(null);
         assertEquals("XYZ7", id);
+    }
+}
+
+class StubRandom extends Random {
+    private final int number;
+
+    public StubRandom(int number) {
+        this.number = number;
+    }
+
+    @Override
+    public int nextInt(int bound) {
+        return number;
     }
 }
