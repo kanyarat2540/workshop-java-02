@@ -15,5 +15,8 @@ public class IDResponse {
     public IDResponse(String result) {
         this.result = result;
     }
+    public IDResponse() {
+
+    }
 
 }
