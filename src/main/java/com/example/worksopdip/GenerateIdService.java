@@ -12,6 +12,11 @@ class GenerateIdService {
     @Autowired
     private Random random;
 
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+
 //    public void setRandom(Random random) {
 //        this.random = random;
 //    }
@@ -20,7 +25,6 @@ class GenerateIdService {
         int num = random.nextInt(10);
         String id = "A" + num;
         return id;
-
     }
 
 }
